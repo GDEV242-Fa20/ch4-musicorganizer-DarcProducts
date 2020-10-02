@@ -1,11 +1,14 @@
+
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.Collections;
 
 /**
  * A class to hold details of audio tracks.
  * Individual tracks may be played.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29
+ * @author Craig Hussey
+ * @version 2020.10.02
  */
 public class MusicOrganizer
 {
@@ -15,7 +18,7 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
-
+    private Random rand = new Random();
     /**
      * Create a MusicOrganizer
      */
@@ -30,6 +33,28 @@ public class MusicOrganizer
     }
     
     /**
+     * shuffle song ~ exercise 4.43 ~ Craig Hussey
+     */
+    public void shuffle()
+    {
+        int num = rand.nextInt(tracks.size());
+        playTrack(num);
+    }
+    
+    /**
+     * play all tracks randomly ~ exercise 4.45 ~ Craig Hussey
+     */
+    public void playAllTracksOnceRandomly()
+    {
+        ArrayList<String> myList = new ArrayList();
+        for (Track myTrack : tracks)
+        myList.add(myTrack.getFilename());
+        Collections.shuffle(myList);
+        for (String track : myList)
+        player.playSample(track);
+    }
+            
+    /**
      * Add a track file to the collection.
      * @param filename The file name of the track to be added.
      */
@@ -37,7 +62,7 @@ public class MusicOrganizer
     {
         tracks.add(new Track(filename));
     }
-    
+
     /**
      * Add a track to the collection.
      * @param track The track to be added.
@@ -56,10 +81,12 @@ public class MusicOrganizer
         if(indexValid(index)) {
             Track track = tracks.get(index);
             player.playSample(track.getFilename());
-            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
+            System.out.println("Now playing: " + track.getArtist() + 
+                " - " + track.getTitle());
         }
     }
-    
+
+            
     /**
      * Return the number of tracks in the collection.
      * @return The number of tracks in the collection.
