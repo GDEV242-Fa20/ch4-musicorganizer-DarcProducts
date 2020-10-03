@@ -51,10 +51,7 @@ public class MusicOrganizer
         myList.add(myTrack.getFilename());
         Collections.shuffle(myList);
         for (String track : myList)
-        {
         player.playSample(track);
-        System.out.println("Now playing: " + track);
-        }
     }
             
     /**
