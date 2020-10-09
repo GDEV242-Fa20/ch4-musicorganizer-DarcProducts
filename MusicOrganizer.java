@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Collections;
@@ -18,9 +17,11 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
+    //random generator to use
     private Random rand = new Random();
     /**
      * Create a MusicOrganizer
+     * @constructor
      */
     public MusicOrganizer()
     {
@@ -33,23 +34,31 @@ public class MusicOrganizer
     }
     
     /**
-     * shuffle song ~ exercise 4.43 ~ Craig Hussey
+     * shuffle to a random song
+     * @method
      */
     public void shuffle()
     {
+        // stores a integer between 0 and track size
         int num = rand.nextInt(tracks.size());
+        //play track using stored number as index
         playTrack(num);
     }
     
     /**
-     * play all tracks randomly ~ exercise 4.45 ~ Craig Hussey
+     * play all tracks randomly once
+     * @method
      */
     public void playAllTracksOnceRandomly()
     {
+        //creates a new string array
         ArrayList<String> myList = new ArrayList();
+        //adds the filename of each track to array
         for (Track myTrack : tracks)
         myList.add(myTrack.getFilename());
+        //shuffles the string array
         Collections.shuffle(myList);
+        //plays each track in the new order
         for (String track : myList)
         {
             System.out.println(track);
